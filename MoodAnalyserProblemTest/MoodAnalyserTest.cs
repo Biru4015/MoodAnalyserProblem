@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,36 +11,27 @@ namespace MoodAnalyserProblemTest
     public class MoodAnalyser
     {
 
-        String message;
-
+        private String message;
         public MoodAnalyser(String message)
         {
             this.message = message;
         }
 
-        public String MoodAnalyseMethod(String message)
-        {
-            this.message = message;
-            return MoodAnalyseMethod();
-        }
-
-        /// <summary>
-        /// This method is created for checking string with another string
-        /// </summary>
-        /// <returns>SAD|HAPPY</returns>
-        public String MoodAnalyseMethod()
+        public String MoodAnalysisMethod()
         {
             try
             {
-                if (message.Contains("sad"))
+                if (message.Length == 0)
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.EMPTY_EXCEPTION, "Please Enter Value..Mood Cant be NULL");
+                else if (message.Contains("sad"))
                     return "SAD";
                 else
                     return "HAPPY";
             }
             catch(NullReferenceException)
             {
-                return "HAPPY";
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NULL_EXCEPTION, "Please Enter Value..Mood Cant be NULL");
             }
         }
-    }
+     }
 }
