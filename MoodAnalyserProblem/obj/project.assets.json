@@ -1,11 +1,48 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "DotLiquid/2.0.325": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.3/DotLiquid.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/DotLiquid.dll": {}
+        },
+        "resource": {
+          "lib/netstandard1.3/it/DotLiquid.resources.dll": {
+            "locale": "it"
+          }
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "DotLiquid/2.0.325": {
+      "sha512": "Of7qniyqNJ6+LeO9LZB5x4oE/kjqXn0QqFvQPuqCZpM2mhvZdcrmyT7Z8ZqxvyK5+/4NV1N7lk5PlkWiaDvbyQ==",
+      "type": "package",
+      "path": "dotliquid/2.0.325",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "dotliquid.2.0.325.nupkg.sha512",
+        "dotliquid.nuspec",
+        "lib/net45/DotLiquid.dll",
+        "lib/net45/DotLiquid.xml",
+        "lib/net45/it/DotLiquid.resources.dll",
+        "lib/netstandard1.3/DotLiquid.dll",
+        "lib/netstandard1.3/DotLiquid.xml",
+        "lib/netstandard1.3/it/DotLiquid.resources.dll",
+        "readme.txt"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "DotLiquid >= 2.0.325"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Birendra Kumar\\.nuget\\packages\\": {}
@@ -43,6 +80,12 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "dependencies": {
+          "DotLiquid": {
+            "target": "Package",
+            "version": "[2.0.325, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

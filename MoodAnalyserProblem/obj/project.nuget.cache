@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "eBFU2ToOMyHvFU3LgWxPZjU7cjI1Y7y2uEGsBQztlnjWavqoE2QWUKhucchslKL9CxdBaQRZrPuh4o5VHryyNA==",
+  "dgSpecHash": "TM04RxOtbyD+st6t+kCzikE0QTT4lsMLmP7GvRpj2F4dRKTBEr0MQVcEtpbLrHO4J9dcqLXYGD91Ag+xQbqnCg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Birendra Kumar\\source\\repos\\MoodAnalyserProblem\\MoodAnalyserProblem.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Birendra Kumar\\.nuget\\packages\\dotliquid\\2.0.325\\dotliquid.2.0.325.nupkg.sha512"
+  ],
   "logs": []
 }

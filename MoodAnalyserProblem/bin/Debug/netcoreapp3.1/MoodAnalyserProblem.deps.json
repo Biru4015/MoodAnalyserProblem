@@ -7,8 +7,24 @@
   "targets": {
     ".NETCoreApp,Version=v3.1": {
       "MoodAnalyserProblem/1.0.0": {
+        "dependencies": {
+          "DotLiquid": "2.0.325"
+        },
         "runtime": {
           "MoodAnalyserProblem.dll": {}
+        }
+      },
+      "DotLiquid/2.0.325": {
+        "runtime": {
+          "lib/netstandard1.3/DotLiquid.dll": {
+            "assemblyVersion": "2.0.325.0",
+            "fileVersion": "2.0.325.0"
+          }
+        },
+        "resources": {
+          "lib/netstandard1.3/it/DotLiquid.resources.dll": {
+            "locale": "it"
+          }
         }
       }
     }
@@ -18,6 +34,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "DotLiquid/2.0.325": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Of7qniyqNJ6+LeO9LZB5x4oE/kjqXn0QqFvQPuqCZpM2mhvZdcrmyT7Z8ZqxvyK5+/4NV1N7lk5PlkWiaDvbyQ==",
+      "path": "dotliquid/2.0.325",
+      "hashPath": "dotliquid.2.0.325.nupkg.sha512"
     }
   }
 }
