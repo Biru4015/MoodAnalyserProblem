@@ -1,12 +1,14 @@
 using NUnit.Framework;
 using MoodAnalyserProblemTest;
 using System;
+using System.Reflection;
 
 namespace MoodAnalyserProblemTest
 {
     /// <summary>
     /// This class contains the code of testing of mood analyser
     /// </summary>
+    [TestFixture]
     public class Tests
     {
         /// <summary>
@@ -46,6 +48,9 @@ namespace MoodAnalyserProblemTest
             }
         }
 
+        /// <summary>
+        /// Test case 3.1
+        /// </summary>
         [Test]
         public void EmptyMessageTest_EmptyMoodException()
         {
@@ -60,6 +65,9 @@ namespace MoodAnalyserProblemTest
             }
         }
 
+        /// <summary>
+        /// Test case 3.2
+        /// </summary>
         [Test]
         public void NullMessageTest_NullMoodException()
         {
@@ -71,6 +79,56 @@ namespace MoodAnalyserProblemTest
             catch(MoodAnalysisException e)
             {
                 Assert.AreEqual(MoodAnalysisException.ExceptionType.NULL_EXCEPTION,e.type);
+            }
+        }
+
+        /// <summary>
+        /// Test case 4.1
+        /// </summary>
+        [Test]
+        public void GivenObjectEqualsWithParameter_ReturnTrue()
+        {
+            MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+            ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
+            object obj_compare = obj_mood.GetInstance("MoodAnalyser", constructorInfo);
+            Assert.IsInstanceOf(typeof(MoodAnalyser), obj_compare);
+
+        }
+
+        /// <summary>
+        /// Test case 4.2
+        /// </summary>
+        [Test]
+        public void ClassWithParameterWrong_ReturnClassNotFound()
+        {
+            try
+            {
+                MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+                ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
+                object obj_compare = obj_mood.GetInstance("MoodAnalyser", constructorInfo);
+
+            }
+            catch(MoodAnalysisException e)
+            {
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS,e.type);
+            }
+        }
+
+        /// <summary>
+        /// Test case 4.3
+        /// </summary>
+        [Test]
+        public void ConstructorWithParameterWrong_ReturnNoSuchMethod()
+        {
+            try
+            {
+                MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+                ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
+                object obj_compare = obj_mood.GetInstance("MoodAnalyser", constructorInfo);
+            }
+            catch(MoodAnalysisException e)
+            {
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,e.type);
             }
         }
     }
