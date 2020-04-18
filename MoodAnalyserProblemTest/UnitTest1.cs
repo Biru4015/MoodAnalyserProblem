@@ -12,7 +12,7 @@ namespace MoodAnalyserProblemTest
     public class Tests
     {
         /// <summary>
-        /// Purpose of this method is when mood is sad it returns sad
+        /// Test case 1.1 Purpose of this method is when mood is sad it returns sad
         /// </summary>
         [Test]
         public void MessageWhenSadResposeTest_RetrunsSad()
@@ -22,7 +22,7 @@ namespace MoodAnalyserProblemTest
         }
 
         /// <summary>
-        /// Purpose of this method is when mood is happy it returns happy
+        /// Test case 1.2 Purpose of this method is when mood is happy it returns happy
         /// </summary>
         [Test]
         public void MessageWhenAnyMoodTest_ReturnsHappy()
@@ -32,7 +32,7 @@ namespace MoodAnalyserProblemTest
         }
 
         /// <summary>
-        /// Purpose of this method is when gievn null it return happy
+        /// Test case 2.1 Purpose of this method is when gievn null it return happy
         /// </summary>
         [Test]
         public void MessageNullTest_ReturnsHappy() 
@@ -49,7 +49,7 @@ namespace MoodAnalyserProblemTest
         }
 
         /// <summary>
-        /// Test case 3.1
+        /// Test case 3.1 Testing for empty exception
         /// </summary>
         [Test]
         public void EmptyMessageTest_EmptyMoodException()
@@ -66,7 +66,7 @@ namespace MoodAnalyserProblemTest
         }
 
         /// <summary>
-        /// Test case 3.2
+        /// Test case 3.2 testing for null exception 
         /// </summary>
         [Test]
         public void NullMessageTest_NullMoodException()
@@ -83,7 +83,7 @@ namespace MoodAnalyserProblemTest
         }
 
         /// <summary>
-        /// Test case 4.1
+        /// Test case 4.1 comparing default constructor object and return true
         /// </summary>
         [Test]
         public void GivenObjectEqualsWithParameter_ReturnTrue()
@@ -96,7 +96,7 @@ namespace MoodAnalyserProblemTest
         }
 
         /// <summary>
-        /// Test case 4.2
+        /// Test case 4.2 comparing the class and returns no such class exception 
         /// </summary>
         [Test]
         public void ClassWithParameterWrong_ReturnClassNotFound()
@@ -115,7 +115,7 @@ namespace MoodAnalyserProblemTest
         }
 
         /// <summary>
-        /// Test case 4.3
+        /// Test case 4.3 comparing methods and returns no such method exception
         /// </summary>
         [Test]
         public void ConstructorWithParameterWrong_ReturnNoSuchMethod()
@@ -129,6 +129,57 @@ namespace MoodAnalyserProblemTest
             catch(MoodAnalysisException e)
             {
                 Assert.AreEqual(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,e.type);
+            }
+        }
+
+        /// <summary>
+        /// Test case 5.1 Comparing object using paramterized constructor
+        /// </summary>
+        [Test]
+        public void CompareObjects_UsingParameterizedConstructor_ReturnsObject()
+        {
+            MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+            ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor(1);
+            object obj_compare = obj_mood.GetParameterizedInsatance("MoodAnalyser", constructorInfo, "I am in Sad Mood");
+            MoodAnalyser mood = new MoodAnalyser("I am in Sad Mood");
+            Assert.AreEqual(mood, obj_compare);
+        }
+
+        /// <summary>
+        /// Test case 5.2 comparing the class and throw no such class exception
+        /// </summary>
+        [Test]
+        public void ClassWithParameterConstructorWrong_ReturnClassNotFound()
+        {
+            try
+            {
+                MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+                ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor(1);
+                object obj_compare = obj_mood.GetParameterizedInsatance("MoodAnalysers", constructorInfo, "MoodAnalysis");
+
+            }
+            catch (MoodAnalysisException e)
+            {
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.type);
+            }
+        }
+
+        /// <summary>
+        /// Test case 5.3 comparing the method and throw no such method
+        /// </summary>
+        [Test]
+        public void ClassWithParameterConstructorWrong_ReturnNoSuchMethodFound()
+        {
+            try
+            {
+                MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+                ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor(1);
+                object obj_compare = obj_mood.GetParameterizedInsatance("MoodAnalyser",constructorInfo,"MoodAnalysis");
+
+            }
+            catch (MoodAnalysisException e)
+            {
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.type);
             }
         }
     }

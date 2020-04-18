@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MoodAnalyserProblemTest;
 
 namespace MoodAnalyserProblemTest
 {
@@ -10,31 +11,59 @@ namespace MoodAnalyserProblemTest
     /// </summary>
     public class MoodAnalyser
     {
-        private String message;
+        String message;
+        // <summary>
+        /// Mood analysis default constructor to create instace of the class
+        /// </summary>
         public MoodAnalyser()
         {
-            this.message = "I am in sad mood";
+            this.message = "I am in SAD mood";
         }
 
-        public MoodAnalyser(String message)
+        /// <summary>
+        /// MoodAnalysis constructor for initlize message variable
+        /// </summary>
+        /// <param name="in_message"></param>
+        public MoodAnalyser(String in_message)
+        {
+            this.message = in_message;
+        }
+
+        /// <summary>
+        /// Method to initilize message variable
+        /// </summary>
+        /// <param name="message"></param>
+        public void MoodAnalysisMethod(string message)
         {
             this.message = message;
         }
+
+        /// <summary>
+        /// Method to return the mood analysis
+        /// </summary>
+        /// <param name="message"><. mood parameter >
+        /// <returns></. SAD or HAPPY , type: string>
         public String MoodAnalysisMethod()
         {
             try
             {
                 if (message.Length == 0)
-                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.EMPTY_EXCEPTION, "Please Enter Value..Mood Cant be NULL");
-                else if (message.Contains("sad"))
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.EMPTY_EXCEPTION, "Please Enter Value..Mood Cant be Empty");
+                if (message.Contains("sad",StringComparison.OrdinalIgnoreCase))
                     return "SAD";
                 else
                     return "HAPPY";
             }
             catch(NullReferenceException)
             {
+                return "HAPPY";
                 throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NULL_EXCEPTION, "Please Enter Value..Mood Cant be NULL");
             }
+        }
+        override
+         public bool Equals(Object obj)
+        {
+            return this.message == ((MoodAnalyser)obj).message;
         }
     }
 }

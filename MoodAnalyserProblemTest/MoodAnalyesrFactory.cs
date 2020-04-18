@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
+using MoodAnalyserProblemTest;
 
 namespace MoodAnalyserProblemTest
 {
     class MoodAnalyesrFactory<Gtype>
     {
-        public ConstructorInfo GetDefaultConstructor()
+        public ConstructorInfo GetDefaultConstructor(int num_parameters=0)
         {
             try
             {
@@ -17,10 +18,9 @@ namespace MoodAnalyserProblemTest
                 // sending defalut constructor => parameters are 0
                 foreach (var info in constructor)
                 {
-                    if (info.GetParameters().Length == 0)
+                    if (info.GetParameters().Length == num_parameters)
                         return info;
                 }
-
                 return constructor[0];
             }
             catch(Exception)
@@ -29,6 +29,11 @@ namespace MoodAnalyserProblemTest
             }
         }
 
+        /// <summary>
+        /// Method to create and return object 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public object GetInstance(string class_name, ConstructorInfo constructor)
         {
             try
@@ -49,6 +54,31 @@ namespace MoodAnalyserProblemTest
             {
                 throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.Error_in_Object_Creation, "Error occured in Object creation in GetInstance Method");
             }
+
+        }
+
+        /// <summary>
+        /// This method is created for get parameterized object
+        /// </summary>
+        /// <param name="class_name"></param>
+        /// <param name="constructor"></param>
+        /// <param name="parameterValue"></param>
+        /// <returns>object</returns>
+        public object GetParameterizedInsatance(string class_name, ConstructorInfo constructor, string parameterValue)
+        {
+            // create type using given type
+            Type type = typeof(Gtype);
+            // given class not equals to type name throw exception
+            if (class_name != type.Name)
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "No such class");
+            // given constructor name is not equals to constructor of type throw exception
+            if (constructor != type.GetConstructors()[1])
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "No such Method Found");
+            // create instance with constructor
+            //var Object_return = constructor.Invoke(); 
+            //creating instance using parametersised constructor
+            Object Object_return = Activator.CreateInstance(type, parameterValue);
+            return Object_return;
 
         }
     }
