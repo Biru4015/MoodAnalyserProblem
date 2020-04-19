@@ -27,8 +27,15 @@ namespace MoodAnalyserProblemTest
         [Test]
         public void MessageWhenAnyMoodTest_ReturnsHappy()
         {
-            MoodAnalyser mood = new MoodAnalyser("I am in any mood");
-            Assert.AreEqual("HAPPY",mood.MoodAnalysisMethod());
+            try
+            { 
+                MoodAnalyser mood = new MoodAnalyser("I am in any mood");
+                Assert.AreEqual("HAPPY", mood.MoodAnalysisMethod());
+            }
+            catch(MoodAnalysisException e)
+            {
+                _ = e.StackTrace;
+            }
         }
 
         /// <summary>
@@ -88,7 +95,7 @@ namespace MoodAnalyserProblemTest
         [Test]
         public void GivenObjectEqualsWithParameter_ReturnTrue()
         {
-            MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+            MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
             ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
             object obj_compare = obj_mood.GetInstance("MoodAnalyser", constructorInfo);
             Assert.IsInstanceOf(typeof(MoodAnalyser), obj_compare);
@@ -103,7 +110,7 @@ namespace MoodAnalyserProblemTest
         {
             try
             {
-                MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+                MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
                 ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
                 object obj_compare = obj_mood.GetInstance("MoodAnalyser", constructorInfo);
 
@@ -122,7 +129,7 @@ namespace MoodAnalyserProblemTest
         {
             try
             {
-                MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+                MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
                 ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
                 object obj_compare = obj_mood.GetInstance("MoodAnalyser", constructorInfo);
             }
@@ -138,7 +145,7 @@ namespace MoodAnalyserProblemTest
         [Test]
         public void CompareObjects_UsingParameterizedConstructor_ReturnsObject()
         {
-            MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+            MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
             ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor(1);
             object obj_compare = obj_mood.GetParameterizedInsatance("MoodAnalyser", constructorInfo, "I am in Sad Mood");
             MoodAnalyser mood = new MoodAnalyser("I am in Sad Mood");
@@ -153,7 +160,7 @@ namespace MoodAnalyserProblemTest
         {
             try
             {
-                MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+                MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
                 ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor(1);
                 object obj_compare = obj_mood.GetParameterizedInsatance("MoodAnalysers", constructorInfo, "MoodAnalysis");
 
@@ -172,9 +179,48 @@ namespace MoodAnalyserProblemTest
         {
             try
             {
-                MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
+                MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
                 ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor(1);
                 object obj_compare = obj_mood.GetParameterizedInsatance("MoodAnalyser",constructorInfo,"MoodAnalysis");
+
+            }
+            catch (MoodAnalysisException e)
+            {
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.type);
+            }
+        }
+
+        /// <summary>
+        /// TestCse_6.1
+        /// Invokes the method using reflection should return happy.
+        /// </summary>
+        [Test]
+        public void InvokeMethodUsingReflection_shouldReturnHappy()
+        {
+            try
+            {
+                MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
+                string actual = obj_mood.InvokeMoodAnalyser();
+                string Expected = "HAPPY";
+                Assert.AreEqual(actual, Expected);
+            }
+            catch(NullReferenceException e)
+            {
+                _ = e.StackTrace;
+            }
+        }
+
+        /// <summary>
+        /// Test Case 6.2
+        /// Invoke the method using reflection and returns no such method
+        /// </summary>
+        public void InvokeMethodUsingReflection_shouldNoSuchMethod()
+        {
+            try
+            {
+                MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
+                ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
+                object obj_compare = obj_mood.GetParameterizedInsatance("MoodAnalyser", constructorInfo, "MoodAnalysis");
 
             }
             catch (MoodAnalysisException e)

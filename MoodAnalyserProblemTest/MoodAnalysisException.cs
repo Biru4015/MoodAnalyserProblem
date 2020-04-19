@@ -16,7 +16,9 @@ namespace MoodAnalyserProblemTest
             EMPTY_EXCEPTION,
             NO_SUCH_CLASS,
             NO_SUCH_METHOD,
-            Error_in_Object_Creation
+            Error_in_Object_Creation,
+            Wrong_Input,
+            Instance_gneration_exception,
         }
 
         public MoodAnalysisException(ExceptionType type, String message) : base(message)

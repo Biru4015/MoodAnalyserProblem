@@ -51,8 +51,8 @@ namespace MoodAnalyserProblemTest
                     throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.EMPTY_EXCEPTION, "Please Enter Value..Mood Cant be Empty");
                 if (message.Contains("sad",StringComparison.OrdinalIgnoreCase))
                     return "SAD";
-                else
-                    return "HAPPY";
+                else if (message.Contains("HAPPY", StringComparison.OrdinalIgnoreCase)) return "HAPPY";
+                else throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.Wrong_Input, "Please enter proper Mood");
             }
             catch(NullReferenceException)
             {
@@ -60,8 +60,14 @@ namespace MoodAnalyserProblemTest
                 throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NULL_EXCEPTION, "Please Enter Value..Mood Cant be NULL");
             }
         }
+
+        /// <summary>
+        /// This method is overrinding the MoodAnalyser method
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>true of false</returns>
         override
-         public bool Equals(Object obj)
+        public bool Equals(Object obj)
         {
             return this.message == ((MoodAnalyser)obj).message;
         }
