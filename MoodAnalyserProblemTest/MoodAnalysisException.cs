@@ -19,6 +19,7 @@ namespace MoodAnalyserProblemTest
             Error_in_Object_Creation,
             Wrong_Input,
             Instance_gneration_exception,
+            No_Such_Field_Exception
         }
 
         public MoodAnalysisException(ExceptionType type, String message) : base(message)

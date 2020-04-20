@@ -6,8 +6,17 @@ using MoodAnalyserProblemTest;
 
 namespace MoodAnalyserProblemTest
 {
+    /// <summary>
+    /// This class contains the code of reflector of MoodAnalyser
+    /// </summary>
+    /// <typeparam name="Gtype"></typeparam>
     class MoodAnalyesrReflecotr<Gtype>
     {
+        /// <summary>
+        /// This is default constructor
+        /// </summary>
+        /// <param name="num_parameters"></param>
+        /// <returns></returns>
         public ConstructorInfo GetDefaultConstructor(int num_parameters=0)
         {
             try
@@ -85,16 +94,51 @@ namespace MoodAnalyserProblemTest
         /// <summary>
         /// This method is created for use reflection for invoke method
         /// </summary>
-        public string InvokeMoodAnalyser()
+        public string InvokeMoodAnalyser(string methodName, string fieldName)
         {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                Type moodAnalysertype = Type.GetType("AnalyseMood.MoodAnalyser");
-                MethodInfo methodInfo = moodAnalysertype.GetMethod("MoodAnalyser");
+                Type moodAnalysertype = Type.GetType("MoodAnalyser");
+                MethodInfo methodInfo = moodAnalysertype.GetMethod(methodName);
                 string[] stringArray = { "I am in Happy mood" };
                 object objectInstance = Activator.CreateInstance(moodAnalysertype, stringArray);
+            try
+            {
+                if (fieldName != null)
+                {
+                    FieldInfo fieldInfo = moodAnalysertype.GetField(fieldName);
+                    if (fieldInfo == null)
+                        return "" + MoodAnalysisException.ExceptionType.NULL_EXCEPTION;
+                    fieldInfo.SetValue(objectInstance, fieldName);
+                }
+            }
+            catch (MoodAnalysisException)
+            {
+                return "No_Such_Field_Exception";
+            }
+            try
+            {
+                if (fieldName == null)
+                {
+                    return "" + MoodAnalysisException.ExceptionType.NULL_EXCEPTION;
+                }
+            }
+            catch (MoodAnalysisException)
+            {
+                return "NULL_EXCEPTION";
+            }
+            try
+            {
+                if (methodInfo == null)
+                {
+                   return ""+MoodAnalysisException.ExceptionType.NO_SUCH_METHOD;
+                }
+
                 string method = (string)methodInfo.Invoke(objectInstance, null);
                 return method;
-            
+            }
+            catch (MoodAnalysisException)
+            {
+                return "HAPPY";
+            }
         }
     }
 }

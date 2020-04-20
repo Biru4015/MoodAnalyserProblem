@@ -99,7 +99,6 @@ namespace MoodAnalyserProblemTest
             ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
             object obj_compare = obj_mood.GetInstance("MoodAnalyser", constructorInfo);
             Assert.IsInstanceOf(typeof(MoodAnalyser), obj_compare);
-
         }
 
         /// <summary>
@@ -200,7 +199,7 @@ namespace MoodAnalyserProblemTest
             try
             {
                 MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
-                string actual = obj_mood.InvokeMoodAnalyser();
+                string actual = obj_mood.InvokeMoodAnalyser("MoodAnalyser","HAPPY");
                 string Expected = "HAPPY";
                 Assert.AreEqual(actual, Expected);
             }
@@ -226,6 +225,26 @@ namespace MoodAnalyserProblemTest
             catch (MoodAnalysisException e)
             {
                 Assert.AreEqual(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.type);
+            }
+        }
+
+        /// <summary>
+        /// Test case 7.1
+        /// Sets the field value should return happy
+        /// </summary>
+        [Test]
+        public void SetFieldValue_shouldReturnHappy()
+        {
+            try
+            {
+                MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
+                string actual = obj_mood.InvokeMoodAnalyser("MoodAnalysisMethod", "message");
+                string Expected = "HAPPY";
+                Assert.AreEqual(actual, Expected);
+            }
+            catch(NullReferenceException e)
+            {
+                _ = e.StackTrace;
             }
         }
     }
