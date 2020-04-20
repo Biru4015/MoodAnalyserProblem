@@ -247,5 +247,45 @@ namespace MoodAnalyserProblemTest
                 _ = e.StackTrace;
             }
         }
+
+        /// <summary>
+        /// Use CAse 7.2
+        /// Sets the field value should return No_Such_Field_Exception.
+        /// </summary>
+        [Test]
+        public void SetImproperField_throwException()
+        {
+            try
+            {
+                MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
+                string actual = obj_mood.InvokeMoodAnalyser("AnalyseMood", "Improper Field Name");
+                string Expected = "No_Such_Field_Exception";
+                Assert.AreEqual(Expected, actual);
+            }
+            catch(NullReferenceException e)
+            {
+                _ = e.StackTrace;
+            }
+        }
+
+        /// <summary>
+        /// Use CAse 7.3
+        /// Sets the field value should return Null_Exception.
+        /// </summary>
+        [Test]
+        public void SetNullField_throwException()
+        {
+            try
+            {
+                MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
+                string actual = obj_mood.InvokeMoodAnalyser("AnalyseMood", null);
+                string Expected = "Null_Exception";
+                Assert.AreEqual(Expected, actual);
+            }
+            catch(NullReferenceException e)
+            {
+                _ = e.StackTrace;
+            }
+        }
     }
 }
