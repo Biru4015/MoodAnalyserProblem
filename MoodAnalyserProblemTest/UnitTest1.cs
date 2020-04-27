@@ -15,7 +15,7 @@ namespace MoodAnalyserProblemTest
         /// Purpose of this method is when mood is sad it returns sad
         /// </summary>
         [Test]
-        public void MessageWhenSadResposeTest_RetrunsSad()
+        public void givenSadMesaage_WhenAnalyse_ShouldReturnSad()
         {
             MoodAnalyser mood = new MoodAnalyser("I am sad in sad mood");
             Assert.AreEqual("SAD", mood.MoodAnalysisMethod());
@@ -25,7 +25,7 @@ namespace MoodAnalyserProblemTest
         /// Purpose of this method is when mood is happy it returns happy
         /// </summary>
         [Test]
-        public void MessageWhenAnyMoodTest_ReturnsHappy()
+        public void givenHappyMesaage_WhenAnalyse_ShouldReturnHappy()
         {
             MoodAnalyser mood = new MoodAnalyser("I am in any mood");
             Assert.AreEqual("HAPPY",mood.MoodAnalysisMethod());
@@ -35,7 +35,7 @@ namespace MoodAnalyserProblemTest
         /// Purpose of this method is when gievn null it return happy
         /// </summary>
         [Test]
-        public void MessageNullTest_ReturnsHappy() 
+        public void givenNullMessage_WhenAnalyse_shouldReturnsHappy()
         {
             try
             {
@@ -52,7 +52,7 @@ namespace MoodAnalyserProblemTest
         /// Test case 3.1
         /// </summary>
         [Test]
-        public void EmptyMessageTest_EmptyMoodException()
+        public voidgivenEmptyMessage_WhenAnalyse_shouldReturnsEmptyMoodException()
         {
             try
             {
@@ -69,7 +69,7 @@ namespace MoodAnalyserProblemTest
         /// Test case 3.2
         /// </summary>
         [Test]
-        public void NullMessageTest_NullMoodException()
+        public void givenNullMessage_WhenAnalyse_shouldReturnsNullMoodException()
         {
             try
             {
@@ -86,7 +86,7 @@ namespace MoodAnalyserProblemTest
         /// Test case 4.1
         /// </summary>
         [Test]
-        public void GivenObjectEqualsWithParameter_ReturnTrue()
+        public void givenMoodAnalserObject_WhenAnalyse_shouldReturnsMoodAnalyserObject()
         {
             MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
             ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
@@ -99,7 +99,7 @@ namespace MoodAnalyserProblemTest
         /// Test case 4.2
         /// </summary>
         [Test]
-        public void ClassWithParameterWrong_ReturnClassNotFound()
+        public void givenWrongClassName_WhenAnalyse_shouldReturnsClassNotFoundException()
         {
             try
             {
@@ -118,7 +118,7 @@ namespace MoodAnalyserProblemTest
         /// Test case 4.3
         /// </summary>
         [Test]
-        public void ConstructorWithParameterWrong_ReturnNoSuchMethod()
+        public void givenWrongClassName_WhenAnalyse_shouldReturnsClassNotFoundException()
         {
             try
             {
