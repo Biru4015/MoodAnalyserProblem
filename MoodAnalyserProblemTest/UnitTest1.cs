@@ -5,14 +5,14 @@ namespace MoodAnalyserProblemTest
     public class Tests
     {
         [Test]
-        public void MessageWhenSadResposeTest_RetrunsSad()
+        public void givenSadMesaage_WhenAnalyse_ShouldReturnSad()
         {
             MoodAnalyser mood = new MoodAnalyser("I am sad in sad mood");
             Assert.AreEqual("SAD", mood.moodAnalyseMethod());
         }
 
         [Test]
-        public void MessageWhenAnyMoodTest_ReturnsHappy()
+        public void givenHappyMesaage_WhenAnalyse_ShouldReturnHappy()
         {
             MoodAnalyser mood = new MoodAnalyser("I am in any mood");
             Assert.AreEqual("HAPPY",mood.moodAnalyseMethod());
