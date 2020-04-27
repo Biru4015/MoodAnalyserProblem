@@ -12,90 +12,83 @@ namespace MoodAnalyserProblemTest
     public class Tests
     {
         /// <summary>
-        /// Test case 1.1 Purpose of this method is when mood is sad it returns sad
+        /// Purpose of this method is when mood is sad it returns sad
         /// </summary>
         [Test]
-        public void MessageWhenSadResposeTest_RetrunsSad()
+        public void givenSadMesaage_WhenAnalyse_ShouldReturnSad()
         {
             MoodAnalyser mood = new MoodAnalyser("I am sad in sad mood");
             Assert.AreEqual("SAD", mood.MoodAnalysisMethod());
         }
 
         /// <summary>
-        /// Test case 1.2 Purpose of this method is when mood is happy it returns happy
+        /// Purpose of this method is when mood is happy it returns happy
         /// </summary>
         [Test]
-        public void MessageWhenAnyMoodTest_ReturnsHappy()
+        public void givenHappyMesaage_WhenAnalyse_ShouldReturnHappy()
         {
-            try
-            { 
-                MoodAnalyser mood = new MoodAnalyser("I am in any mood");
-                Assert.AreEqual("HAPPY", mood.MoodAnalysisMethod());
-            }
-            catch(MoodAnalysisException e)
-            {
-                _ = e.StackTrace;
-            }
+            MoodAnalyser mood = new MoodAnalyser("I am in any mood");
+            Assert.AreEqual("HAPPY", mood.MoodAnalysisMethod());
         }
 
         /// <summary>
-        /// Test case 2.1 Purpose of this method is when gievn null it return happy
+        /// Purpose of this method is when gievn null it return happy
         /// </summary>
         [Test]
-        public void MessageNullTest_ReturnsHappy() 
+        public void givenNullMessage_WhenAnalyse_shouldReturnsHappy()
         {
             try
             {
                 MoodAnalyser mood = new MoodAnalyser(null);
                 mood.MoodAnalysisMethod();
             }
-            catch(MoodAnalysisException e)
+            catch (MoodAnalysisException e)
             {
-                Assert.AreEqual(MoodAnalysisException.ExceptionType.NULL_EXCEPTION,e.type);
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.NULL_EXCEPTION, e.type);
             }
         }
 
         /// <summary>
-        /// Test case 3.1 Testing for empty exception
+        /// Test case 3.1
         /// </summary>
         [Test]
-        public void EmptyMessageTest_EmptyMoodException()
+        public voidgivenEmptyMessage_WhenAnalyse_shouldReturnsEmptyMoodException()
         {
             try
             {
                 MoodAnalyser mood = new MoodAnalyser("");
                 mood.MoodAnalysisMethod();
             }
-            catch(MoodAnalysisException e)
+            catch (MoodAnalysisException e)
             {
-                Assert.AreEqual(MoodAnalysisException.ExceptionType.EMPTY_EXCEPTION,e.type);
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.EMPTY_EXCEPTION, e.type);
             }
         }
 
         /// <summary>
-        /// Test case 3.2 testing for null exception 
+        /// Test case 3.2
         /// </summary>
         [Test]
-        public void NullMessageTest_NullMoodException()
+        public void givenNullMessage_WhenAnalyse_shouldReturnsNullMoodException()
         {
             try
             {
                 MoodAnalyser mood = new MoodAnalyser(null);
                 mood.MoodAnalysisMethod();
             }
-            catch(MoodAnalysisException e)
+            catch (MoodAnalysisException e)
             {
-                Assert.AreEqual(MoodAnalysisException.ExceptionType.NULL_EXCEPTION,e.type);
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.NULL_EXCEPTION, e.type);
             }
         }
 
         /// <summary>
-        /// Test case 4.1 comparing default constructor object and return true
+        /// Test case 4.1
         /// </summary>
         [Test]
-        public void GivenObjectEqualsWithParameter_ReturnTrue()
+        public void givenMoodAnalserObject_WhenAnalyse_shouldReturnsMoodAnalyserObject()
         {
-            MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
+            MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
             ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
             object obj_compare = obj_mood.GetInstance("MoodAnalyser", constructorInfo);
             Assert.IsInstanceOf(typeof(MoodAnalyser), obj_compare);
@@ -103,39 +96,39 @@ namespace MoodAnalyserProblemTest
         }
 
         /// <summary>
-        /// Test case 4.2 comparing the class and returns no such class exception 
+        /// Test case 4.2
         /// </summary>
         [Test]
-        public void ClassWithParameterWrong_ReturnClassNotFound()
+        public void givenWrongClassName_WhenAnalyse_shouldReturnsClassNotFoundException()
         {
             try
             {
-                MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
+                MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
                 ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
                 object obj_compare = obj_mood.GetInstance("MoodAnalyser", constructorInfo);
 
             }
-            catch(MoodAnalysisException e)
+            catch (MoodAnalysisException e)
             {
-                Assert.AreEqual(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS,e.type);
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, e.type);
             }
         }
 
         /// <summary>
-        /// Test case 4.3 comparing methods and returns no such method exception
+        /// Test case 4.3
         /// </summary>
         [Test]
-        public void ConstructorWithParameterWrong_ReturnNoSuchMethod()
+        public void givenWrongClassName_WhenAnalyse_shouldReturnsClassNotFoundException()
         {
             try
             {
-                MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
+                MoodAnalyesrFactory<MoodAnalyser> obj_mood = new MoodAnalyesrFactory<MoodAnalyser>();
                 ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor();
                 object obj_compare = obj_mood.GetInstance("MoodAnalyser", constructorInfo);
             }
-            catch(MoodAnalysisException e)
+            catch (MoodAnalysisException e)
             {
-                Assert.AreEqual(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,e.type);
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, e.type);
             }
         }
 
@@ -143,7 +136,7 @@ namespace MoodAnalyserProblemTest
         /// Test case 5.1 Comparing object using paramterized constructor
         /// </summary>
         [Test]
-        public void CompareObjects_UsingParameterizedConstructor_ReturnsObject()
+        public void givenObject_WhenAnalyse_shouldReturnsObject()
         {
             MoodAnalyesrReflecotr<MoodAnalyser> obj_mood = new MoodAnalyesrReflecotr<MoodAnalyser>();
             ConstructorInfo constructorInfo = obj_mood.GetDefaultConstructor(1);
@@ -156,7 +149,7 @@ namespace MoodAnalyserProblemTest
         /// Test case 5.2 comparing the class and throw no such class exception
         /// </summary>
         [Test]
-        public void ClassWithParameterConstructorWrong_ReturnClassNotFound()
+        public void givenWrongClassName_WhenAnalyse_shouldReturnsClassNotFoundException()
         {
             try
             {
@@ -175,7 +168,7 @@ namespace MoodAnalyserProblemTest
         /// Test case 5.3 comparing the method and throw no such method
         /// </summary>
         [Test]
-        public void ClassWithParameterConstructorWrong_ReturnNoSuchMethodFound()
+        public void givenWrongMethodName_WhenAnalyse_shouldReturnsMethodNotFoundException()
         {
             try
             {
@@ -195,7 +188,7 @@ namespace MoodAnalyserProblemTest
         /// Invokes the method using reflection should return happy.
         /// </summary>
         [Test]
-        public void InvokeMethodUsingReflection_shouldReturnHappy()
+        public void givenMoodAnalserMethod_WhenAnalyse_shouldReturnsHappy()
         {
             try
             {
@@ -214,7 +207,7 @@ namespace MoodAnalyserProblemTest
         /// Test Case 6.2
         /// Invoke the method using reflection and returns no such method
         /// </summary>
-        public void InvokeMethodUsingReflection_shouldNoSuchMethod()
+        public void givenWrongMethodName_WhenAnalyse_shouldReturnsMethodNotFoundException()
         {
             try
             {
